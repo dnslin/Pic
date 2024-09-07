@@ -26,5 +26,15 @@ export default [
         component: () => import("@/layout/redirect.vue")
       }
     ]
+  },
+  {
+    path: "/index",
+    name: "PureIndex",
+    component: () => import("@/views/index/index.vue"),
+    meta: {
+      title: "欢迎页",
+      showLink: false,
+      rank: 103
+    }
   }
 ] satisfies Array<RouteConfigsTable>;
