@@ -3,12 +3,14 @@ import Cookies from "js-cookie";
 import { useRouter } from "vue-router";
 
 import { useDataThemeChange } from "@/layout/hooks/useDataThemeChange";
-import { ref } from "vue";
 import dayIcon from "@/assets/svg/day.svg?component";
 import darkIcon from "@/assets/svg/dark.svg?component";
 import { storageLocal } from "@pureadmin/utils";
 import { useLayout } from "@/layout/hooks/useLayout";
 import { type DataInfo, userKey, multipleTabsKey } from "@/utils/auth";
+import { addDialog } from "@/components/ReDialog";
+import UploadIndex from "./upload/index.vue";
+
 defineOptions({
   name: "PureIndex"
 });
@@ -20,22 +22,6 @@ const userInfo = storageLocal().getItem<DataInfo<number>>(userKey);
 const router = useRouter();
 const { dataTheme, dataThemeChange } = useDataThemeChange();
 
-const drawer = ref(false);
-
-// 图片上传逻辑 - start
-// 临时定义规则
-const fileRule = [
-  "jpeg",
-  "jpg",
-  "png",
-  "gif",
-  "tif",
-  "bmp",
-  "ico",
-  "psd",
-  "webp"
-];
-
 // handLogin 跳转登录页
 function handleLogin() {
   // 如果已经包含token，直接跳转到首页
@@ -46,6 +32,18 @@ function handleLogin() {
   router.push("/login");
 }
 // 查看详细信息的弹出框
+function handleView() {
+  addDialog({
+    draggable: true,
+    showClose: false,
+    hideFooter: true,
+    class: "custom-dialog",
+    // style: {
+    //   padding: "0px"
+    // },
+    contentRenderer: () => UploadIndex
+  });
+}
 </script>
 
 <template>
@@ -82,7 +80,7 @@ function handleLogin() {
     <div class="mt-4">
       <button
         class="px-3 py-1 border border-stone-200 rounded-full drop-shadow-sm text-sm text-stone-800 dark:text-white bg-white/40 dark:bg-black/40 backdrop-blur-lg hover:border-stone-300 transition-colors dark:border-stone-500 dark:hover:border-stone-400"
-        @click="drawer = true"
+        @click="handleView"
       >
         Upload
       </button>
@@ -92,11 +90,6 @@ function handleLogin() {
 
 <style scoped lang="scss">
 @import url("@/style/css2.css");
-
-:deep(.el-drawer__body) {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
 
 body {
   font-family: Inter, sans-serif;
@@ -184,15 +177,5 @@ body {
 
 .dark .jumbo::after {
   background-image: var(--stripes-dark), var(--rainbow);
-}
-
-.custom-dialog {
-  :deep(.el-dialog__header) {
-    padding-bottom: 0;
-  }
-}
-
-.custom-dialog :deep(.el-dialog) .el-dialog__header {
-  padding-bottom: 0 !important;
 }
 </style>
