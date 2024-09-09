@@ -1,4 +1,5 @@
 <script setup lang="tsx">
+import { ref } from "vue";
 import Cookies from "js-cookie";
 import { useRouter } from "vue-router";
 
@@ -10,17 +11,20 @@ import { useLayout } from "@/layout/hooks/useLayout";
 import { type DataInfo, userKey, multipleTabsKey } from "@/utils/auth";
 import { addDialog } from "@/components/ReDialog";
 import UploadIndex from "./upload/index.vue";
+import ReButton from "@/views/common/ReButton.vue";
 
 defineOptions({
   name: "PureIndex"
 });
+const router = useRouter();
 const { initStorage } = useLayout();
 initStorage();
+
 // 登录信息
 const userInfo = storageLocal().getItem<DataInfo<number>>(userKey);
 
-const router = useRouter();
-const { dataTheme, dataThemeChange } = useDataThemeChange();
+const { dataTheme, overallStyle, dataThemeChange } = useDataThemeChange();
+dataThemeChange(overallStyle.value);
 
 // handLogin 跳转登录页
 function handleLogin() {
@@ -31,18 +35,22 @@ function handleLogin() {
   }
   router.push("/login");
 }
+
 // 查看详细信息的弹出框
 function handleView() {
-  addDialog({
-    draggable: true,
-    showClose: false,
-    hideFooter: true,
-    class: "custom-dialog",
-    // style: {
-    //   padding: "0px"
-    // },
-    contentRenderer: () => UploadIndex
-  });
+  // 延迟0.3s
+  setTimeout(() => {
+    addDialog({
+      draggable: true,
+      showClose: false,
+      hideFooter: true,
+      class: "custom-dialog",
+      // style: {
+      //   padding: "0px"
+      // },
+      contentRenderer: () => UploadIndex
+    });
+  }, 400);
 }
 </script>
 
@@ -77,13 +85,8 @@ function handleView() {
         <span class="text-white dark:text-black">Manager</span>
       </span>
     </h1>
-    <div class="mt-4">
-      <button
-        class="px-3 py-1 border border-stone-200 rounded-full drop-shadow-sm text-sm text-stone-800 dark:text-white bg-white/40 dark:bg-black/40 backdrop-blur-lg hover:border-stone-300 transition-colors dark:border-stone-500 dark:hover:border-stone-400"
-        @click="handleView"
-      >
-        Upload
-      </button>
+    <div class="mt-5">
+      <ReButton ref="confettiButton" text="Upload" @click="handleView" />
     </div>
   </div>
 </template>
