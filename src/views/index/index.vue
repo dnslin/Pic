@@ -42,12 +42,13 @@ function handleView() {
   setTimeout(() => {
     addDialog({
       draggable: true,
-      showClose: false,
+      showClose: true,
+      fullscreen: true,
       hideFooter: true,
       class: "custom-dialog",
-      // style: {
-      //   padding: "0px"
-      // },
+      style: {
+        padding: "0px"
+      },
       contentRenderer: () => UploadIndex
     });
   }, 400);

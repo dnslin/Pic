@@ -7,6 +7,7 @@ import { useEcharts } from "@/plugins/echarts";
 import { createApp, type Directive } from "vue";
 import { useElementPlus } from "@/plugins/elementPlus";
 import { injectResponsiveStorage } from "@/utils/responsive";
+import ElTableInfiniteScroll from "el-table-infinite-scroll";
 
 import Table from "@pureadmin/table";
 import PureDescriptions from "@pureadmin/descriptions";
@@ -62,6 +63,7 @@ getPlatformConfig(app).then(async config => {
     .use(useElementPlus)
     .use(Table)
     .use(PureDescriptions)
-    .use(useEcharts);
+    .use(useEcharts)
+    .use(ElTableInfiniteScroll);
   app.mount("#app");
 });
