@@ -163,7 +163,7 @@ function getLinkContent(type: string) {
         v-el-table-infinite-scroll="load"
         :infinite-scroll-disabled="isBottom"
         table-layout="auto"
-        class="mt-4 animate__animated animate__fadeInUp"
+        class="mt-4 animate__animated animate__fadeInUp animate__duration-1s"
         :data="tableData"
         :columns="columns"
         max-height="400"
@@ -200,7 +200,6 @@ function getLinkContent(type: string) {
               link
               type="primary"
               :icon="useRenderIcon(View)"
-              class="animate__animated animate__fadeIn"
               @click="handleView(row)"
             >
               查看
@@ -210,7 +209,6 @@ function getLinkContent(type: string) {
               link
               type="primary"
               :icon="useRenderIcon(Upload)"
-              class="animate__animated animate__fadeIn"
               @click="handleUpload(row)"
             >
               上传
@@ -219,7 +217,6 @@ function getLinkContent(type: string) {
               link
               type="primary"
               style="margin: 0"
-              class="animate__animated animate__fadeIn"
               :icon="useRenderIcon(Delete)"
               @click="handleDelete(row)"
             >
@@ -231,7 +228,6 @@ function getLinkContent(type: string) {
       <div v-if="tableData.length" class="mt-4">
         <el-button
           type="primary"
-          class="animate__animated animate__bounceIn"
           :disabled="!hasUploadedImages"
           @click="handleViewAllLinks"
           >查看所有图片链接</el-button
