@@ -32,6 +32,8 @@ const getChartComponent = computed(() => {
   if (props.index === 2) return Chart3Round;
   return ChartRound;
 });
+
+const chartData = [30, 40, 20, 50, 40, 60, 50, 40, 30, 40, 20, 30];
 </script>
 
 <template>
@@ -66,8 +68,8 @@ const getChartComponent = computed(() => {
           {{ amount }}
         </div>
       </div>
-      <div class="flex-grow">
-        <component :is="getChartComponent" :color="color" />
+      <div class="chart-container">
+        <component :is="getChartComponent" :color="color" :data="chartData" />
       </div>
     </div>
   </div>
@@ -90,5 +92,19 @@ const getChartComponent = computed(() => {
 
 .stat-card:not(.bg-gray-900):hover {
   background-color: #f8fafc;
+}
+
+.chart-container {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 100px; /* 调整这个值以适应您的需求 */
+  overflow: hidden;
+}
+
+:deep(.chart-container > div) {
+  width: 100%;
+  height: 100%;
 }
 </style>

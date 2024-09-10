@@ -25,8 +25,8 @@ setOptions({
     }
   },
   polar: {
-    radius: ["80%", "90%"],
-    center: ["50%", "40%"]
+    radius: ["100%", "90%"],
+    center: ["50%", "50%"]
   },
   angleAxis: {
     max: 100,
@@ -69,5 +69,5 @@ setOptions({
 </script>
 
 <template>
-  <div ref="chartRef" style="width: 100%; height: 120px" />
+  <div ref="chartRef" style="width: 100%; height: 100px" />
 </template>
