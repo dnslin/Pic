@@ -82,7 +82,7 @@ function handleViewAllLinks() {
 
 const linkTypes = computed(() =>
   allLinksMode.value
-    ? ["original", "markdown", "bbcode", "html", "thumbnail"]
+    ? ["original", "markdown", "bbcode", "html", "thumbnail", "delUrl"]
     : Object.keys(currentLinks.value || {})
 );
 
