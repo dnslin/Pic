@@ -16,14 +16,16 @@ const cardData = [
     category: "今日上传",
     detail: "已上传文件数",
     amount: "327",
-    color: "#3b82f6"
+    color: "#3b82f6",
+    chartData: [30, 40, 20, 50, 40]
   },
   {
     id: "2",
     category: "图库信息",
     detail: "图片总量",
     amount: "9.27W",
-    color: "#10b981"
+    color: "#10b981",
+    chartData: [70, 60, 80, 50, 60]
   },
   {
     id: "3",
@@ -71,7 +73,19 @@ const getColSpan = (index: number) => {
           :is-selected="selectedCard === card.id"
           :index="index"
           @select="selectCard"
-        />
+        >
+          <template #chart>
+            <div class="chart-container">
+              <ChartLine
+                v-if="index < 2"
+                :data="card.chartData"
+                :color="card.color"
+              />
+              <Chart3Round v-else-if="index === 2" style="height: 100px" />
+              <ChartRound v-else style="height: 100px" />
+            </div>
+          </template>
+        </StatCard>
       </el-col>
     </el-row>
   </div>
@@ -94,5 +108,19 @@ const getColSpan = (index: number) => {
 
 :deep(.el-col > div) {
   width: 100%;
+}
+
+.chart-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+@media (width <= 768px) {
+  .chart-wrapper {
+    min-height: 80px;
+  }
 }
 </style>

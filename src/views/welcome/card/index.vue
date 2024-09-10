@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import { ChartLine, Chart3Round, ChartRound } from "../charts";
 interface CardProps {
   id: string;
   category: string;
@@ -27,13 +26,6 @@ const handleKeyDown = (event: KeyboardEvent) => {
     emit("select", props.id);
   }
 };
-const getChartComponent = computed(() => {
-  if (props.index < 2) return ChartLine;
-  if (props.index === 2) return Chart3Round;
-  return ChartRound;
-});
-
-const chartData = [30, 40, 20, 50, 40, 60, 50, 40, 30, 40, 20, 30];
 </script>
 
 <template>
@@ -63,13 +55,13 @@ const chartData = [30, 40, 20, 50, 40, 60, 50, 40, 30, 40, 20, 30];
           {{ detail }}
         </span>
       </div>
-      <div class="mt-auto">
+      <div class="chart-container flex-grow">
+        <slot name="chart" />
+      </div>
+      <div class="amount-overlay absolute bottom-4 left-4 z-10">
         <div class="text-3xl font-bold">
           {{ amount }}
         </div>
-      </div>
-      <div class="chart-container">
-        <component :is="getChartComponent" :color="color" :data="chartData" />
       </div>
     </div>
   </div>
@@ -77,6 +69,8 @@ const chartData = [30, 40, 20, 50, 40, 60, 50, 40, 30, 40, 20, 30];
 
 <style scoped>
 .stat-card {
+  display: flex;
+  flex-direction: column;
   color: var(--text-color);
   background-color: var(--card-color);
   border-left: 4px solid var(--highlight-color);
@@ -97,15 +91,17 @@ const chartData = [30, 40, 20, 50, 40, 60, 50, 40, 30, 40, 20, 30];
 
 .chart-container {
   position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  height: 100px; /* 调整这个值以适应您的需求 */
-  overflow: hidden;
+  inset: 40px 4px 4px;
+  z-index: 1;
 }
 
-:deep(.chart-container > div) {
-  width: 100%;
-  height: 100%;
+.amount-overlay {
+  padding: 2px 6px;
+  background-color: rgb(255 255 255 / 80%);
+  border-radius: 4px;
+}
+
+:deep(.dark) .amount-overlay {
+  background-color: rgb(30 41 59 / 80%);
 }
 </style>

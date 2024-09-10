@@ -1,5 +1,4 @@
 <script setup lang="tsx">
-import { ref } from "vue";
 import Cookies from "js-cookie";
 import { useRouter } from "vue-router";
 
