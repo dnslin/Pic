@@ -81,6 +81,7 @@ const chartData = [30, 40, 20, 50, 40, 60, 50, 40, 30, 40, 20, 30];
   background-color: var(--card-color);
   border-left: 4px solid var(--highlight-color);
   transition: all 0.3s ease;
+  will-change: transform;
 }
 
 .stat-card:hover {

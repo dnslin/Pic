@@ -16,7 +16,7 @@ setOptions({
   container: ".line-card",
   title: {
     text: "100%",
-    left: "47%",
+    left: "49%",
     top: "30%",
     textAlign: "center",
     textStyle: {
@@ -25,7 +25,7 @@ setOptions({
     }
   },
   polar: {
-    radius: ["100%", "90%"],
+    radius: ["100%", "60%"],
     center: ["50%", "50%"]
   },
   angleAxis: {

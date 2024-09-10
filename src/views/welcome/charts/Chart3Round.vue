@@ -10,7 +10,7 @@ let theme = computed(() => {
 
 // 初始化ECharts
 const chartRef = ref();
-const { setOptions } = useECharts(chartRef, { theme });
+const { setOptions } = useECharts(chartRef, { theme, renderer: "svg" });
 
 // 根据配置项渲染ECharts
 setOptions({
@@ -56,5 +56,5 @@ setOptions({
 </script>
 
 <template>
-  <div ref="chartRef" style="width: 100%; height: 35vh" />
+  <div ref="chartRef" style="width: 300px; height: 200px" />
 </template>
