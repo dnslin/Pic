@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import { ChartLine, Chart3Round, ChartRound } from "../charts";
 interface CardProps {
   id: string;
   category: string;
@@ -27,13 +26,6 @@ const handleKeyDown = (event: KeyboardEvent) => {
     emit("select", props.id);
   }
 };
-const getChartComponent = computed(() => {
-  if (props.index < 2) return ChartLine;
-  if (props.index === 2) return Chart3Round;
-  return ChartRound;
-});
-
-const chartData = [30, 40, 20, 50, 40, 60, 50, 40, 30, 40, 20, 30];
 </script>
 
 <template>
@@ -68,9 +60,6 @@ const chartData = [30, 40, 20, 50, 40, 60, 50, 40, 30, 40, 20, 30];
           {{ amount }}
         </div>
       </div>
-      <div class="chart-container">
-        <component :is="getChartComponent" :color="color" :data="chartData" />
-      </div>
     </div>
   </div>
 </template>
@@ -81,6 +70,7 @@ const chartData = [30, 40, 20, 50, 40, 60, 50, 40, 30, 40, 20, 30];
   background-color: var(--card-color);
   border-left: 4px solid var(--highlight-color);
   transition: all 0.3s ease;
+  will-change: transform;
 }
 
 .stat-card:hover {
@@ -92,19 +82,5 @@ const chartData = [30, 40, 20, 50, 40, 60, 50, 40, 30, 40, 20, 30];
 
 .stat-card:not(.bg-gray-900):hover {
   background-color: #f8fafc;
-}
-
-.chart-container {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  height: 100px; /* 调整这个值以适应您的需求 */
-  overflow: hidden;
-}
-
-:deep(.chart-container > div) {
-  width: 100%;
-  height: 100%;
 }
 </style>

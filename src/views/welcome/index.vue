@@ -2,7 +2,6 @@
 import { ref } from "vue";
 import { useWindowSize } from "@vueuse/core";
 import StatCard from "./card/index.vue";
-import { ChartLine, ChartRound, Chart3Round } from "./charts";
 defineOptions({
   name: "Welcome"
 });
