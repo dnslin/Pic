@@ -17,7 +17,8 @@ const cardData = [
     detail: "已上传文件数",
     amount: "327",
     color: "#3b82f6",
-    chartData: [30, 40, 20, 50, 40]
+    chartComponent: ChartLine,
+    chartProps: { data: [30, 40, 20, 50, 40, 60, 70], color: "#3b82f6" }
   },
   {
     id: "2",
@@ -25,21 +26,32 @@ const cardData = [
     detail: "图片总量",
     amount: "9.27W",
     color: "#10b981",
-    chartData: [70, 60, 80, 50, 60]
+    chartComponent: ChartLine,
+    chartProps: { data: [60, 30, 40, 20, 30, 40, 50], color: "#10b981" }
   },
   {
     id: "3",
     category: "存储详情",
     detail: "当前使用存储",
     amount: "63G",
-    color: "#f59e0b"
+    color: "#f59e0b",
+    chartComponent: Chart3Round,
+    chartData: [
+      { value: 100, name: "webg" },
+      { value: 200, name: "png" },
+      { value: 300, name: "jpg" },
+      { value: 400, name: "icon" },
+      { value: 500, name: "gif" },
+      { value: 100, name: "psd" }
+    ]
   },
   {
     id: "4",
     category: "存储容量",
     detail: "总可用存储",
     amount: "500G",
-    color: "#6366f1"
+    color: "#6366f1",
+    chartComponent: ChartRound
   }
 ];
 
@@ -75,15 +87,11 @@ const getColSpan = (index: number) => {
           @select="selectCard"
         >
           <template #chart>
-            <div class="chart-container">
-              <ChartLine
-                v-if="index < 2"
-                :data="card.chartData"
-                :color="card.color"
-              />
-              <Chart3Round v-else-if="index === 2" style="height: 100px" />
-              <ChartRound v-else style="height: 100px" />
-            </div>
+            <component
+              :is="card.chartComponent"
+              v-bind="card.chartProps || {}"
+              :chartData="card.chartData"
+            />
           </template>
         </StatCard>
       </el-col>
@@ -108,19 +116,5 @@ const getColSpan = (index: number) => {
 
 :deep(.el-col > div) {
   width: 100%;
-}
-
-.chart-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-}
-
-@media (width <= 768px) {
-  .chart-wrapper {
-    min-height: 80px;
-  }
 }
 </style>

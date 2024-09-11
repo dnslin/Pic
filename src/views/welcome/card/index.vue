@@ -8,6 +8,7 @@ interface CardProps {
   isSelected: boolean;
   index: number;
   color?: string;
+  chartData?: { value: number; name: string }[];
 }
 
 const props = defineProps<CardProps>();
@@ -55,12 +56,12 @@ const handleKeyDown = (event: KeyboardEvent) => {
           {{ detail }}
         </span>
       </div>
-      <div class="chart-container flex-grow">
-        <slot name="chart" />
-      </div>
-      <div class="amount-overlay absolute bottom-4 left-4 z-10">
+      <div class="flex justify-between items-end mt-auto">
         <div class="text-3xl font-bold">
           {{ amount }}
+        </div>
+        <div class="chart-container">
+          <slot name="chart" />
         </div>
       </div>
     </div>
@@ -69,8 +70,6 @@ const handleKeyDown = (event: KeyboardEvent) => {
 
 <style scoped>
 .stat-card {
-  display: flex;
-  flex-direction: column;
   color: var(--text-color);
   background-color: var(--card-color);
   border-left: 4px solid var(--highlight-color);
@@ -90,18 +89,10 @@ const handleKeyDown = (event: KeyboardEvent) => {
 }
 
 .chart-container {
-  position: absolute;
-  inset: 40px 4px 4px;
-  z-index: 1;
-}
-
-.amount-overlay {
-  padding: 2px 6px;
-  background-color: rgb(255 255 255 / 80%);
-  border-radius: 4px;
-}
-
-:deep(.dark) .amount-overlay {
-  background-color: rgb(30 41 59 / 80%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 60px;
 }
 </style>
