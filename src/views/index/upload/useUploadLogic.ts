@@ -88,7 +88,19 @@ export function useUploadLogic() {
   })();
 
   function isValidFileSize(file: File): boolean {
-    return file.size <= MAX_FILE_SIZE;
+    const isValid = file.size <= MAX_FILE_SIZE;
+
+    if (!isValid) {
+      const sizeMB = (file.size / (1024 * 1024)).toFixed(2);
+      const maxSizeMB = (MAX_FILE_SIZE / (1024 * 1024)).toFixed(2);
+      message(
+        `图片 "${file.name}" (${sizeMB}MB) 超过大小限制 (${maxSizeMB}MB)`,
+        {
+          type: "error"
+        }
+      );
+    }
+    return isValid;
   }
 
   function readFileAsBase64(file: File): Promise<string> {
@@ -146,6 +158,7 @@ export function useUploadLogic() {
     for (const file of validFiles) {
       try {
         const base64 = await readFileAsBase64(file);
+        console.log(`读取文件 "${file.name}" 完成。`);
         await addToTableData(file, base64, "上传中");
       } catch (error) {
         if (error instanceof FileProcessingError) {

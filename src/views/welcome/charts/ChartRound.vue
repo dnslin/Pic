@@ -20,13 +20,13 @@ setOptions({
     top: "30%",
     textAlign: "center",
     textStyle: {
-      fontSize: "16",
+      fontSize: "14",
       fontWeight: 600
     }
   },
   polar: {
     radius: ["100%", "60%"],
-    center: ["50%", "50%"]
+    center: ["55%", "50%"]
   },
   angleAxis: {
     max: 100,

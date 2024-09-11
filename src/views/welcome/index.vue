@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { useWindowSize } from "@vueuse/core";
 import StatCard from "./card/index.vue";
+import { Announcement, UploadGuidelines } from "./other";
 import { ChartLine, ChartRound, Chart3Round } from "./charts";
 defineOptions({
   name: "Welcome"
@@ -55,6 +56,18 @@ const cardData = [
   }
 ];
 
+// 公告内容
+const announcementMessage = ref(
+  "欢迎使用我们的图片管理系统！我们最近更新了存储功能，现在可以支持更大的文件上传。"
+);
+const showAnnouncement = ref(true);
+
+// 处理公告关闭
+const handleAnnouncementClose = () => {
+  showAnnouncement.value = false;
+};
+
+// 卡片逻辑
 const selectCard = (cardId: string) => {
   selectedCard.value = cardId;
 };
@@ -67,6 +80,12 @@ const getColSpan = (index: number) => {
 
 <template>
   <div>
+    <Announcement
+      v-if="showAnnouncement"
+      :message="announcementMessage"
+      @close="handleAnnouncementClose"
+    />
+    <UploadGuidelines class="mb-3" />
     <el-row :gutter="24" justify="space-around">
       <el-col
         v-for="(card, index) in cardData"
@@ -100,16 +119,6 @@ const getColSpan = (index: number) => {
 </template>
 
 <style scoped>
-.welcome-container {
-  padding: 1rem;
-}
-
-@media (width <= 768px) {
-  .welcome-container {
-    padding: 0.5rem;
-  }
-}
-
 :deep(.el-col) {
   display: flex;
 }
