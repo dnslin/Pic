@@ -3,7 +3,7 @@ import { ref } from "vue";
 import { useWindowSize } from "@vueuse/core";
 import StatCard from "./card/index.vue";
 import { Announcement, UploadGuidelines } from "./other";
-import { ChartLine, ChartRound, Chart3Round } from "./charts";
+import { ChartLine, ChartRound, Chart3Round, ChartBar } from "./charts";
 defineOptions({
   name: "Welcome"
 });
@@ -56,6 +56,12 @@ const cardData = [
   }
 ];
 
+// 添加ChartBar所需的数据
+const barChartData = ref({
+  requireData: [120, 200, 150, 80, 70, 110, 130],
+  questionData: [130, 180, 160, 90, 80, 100, 120]
+});
+
 // 公告内容
 const announcementMessage = ref(
   "欢迎使用我们的图片管理系统！我们最近更新了存储功能，现在可以支持更大的文件上传。"
@@ -71,10 +77,16 @@ const handleAnnouncementClose = () => {
 const selectCard = (cardId: string) => {
   selectedCard.value = cardId;
 };
+// 卡片宽度逻辑
 const getColSpan = (index: number) => {
   if (width.value < 768) return 24; // 小屏幕时，每个卡片占满一行
   if (width.value < 1200) return index < 2 ? 12 : 24; // 中等屏幕时，前两个卡片并排，后两个各占一行
   return 6; // 大屏幕时，四个卡片并排
+};
+// 柱状图宽度逻辑
+const getBarChartSpan = () => {
+  if (width.value < 768) return 24; // 小屏幕时，柱状图占满一行
+  return 16; // 大屏幕时，柱状图占据2/3宽度
 };
 </script>
 
@@ -114,6 +126,59 @@ const getColSpan = (index: number) => {
           </template>
         </StatCard>
       </el-col>
+      <el-col
+        v-motion
+        :xs="24"
+        :sm="24"
+        :md="getBarChartSpan()"
+        :lg="16"
+        class="mb-4"
+        :initial="{ opacity: 0, y: 100 }"
+        :enter="{
+          opacity: 1,
+          y: 0,
+          transition: { delay: 80 * (cardData.length + 1) }
+        }"
+      >
+        <div class="chart-container">
+          <ChartBar
+            :requireData="barChartData.requireData"
+            :questionData="barChartData.questionData"
+          />
+        </div>
+      </el-col>
+      <el-col
+        v-motion
+        :xs="24"
+        :sm="24"
+        :md="getBarChartSpan()"
+        :lg="8"
+        class="mb-4"
+        :initial="{ opacity: 0, y: 100 }"
+        :enter="{
+          opacity: 1,
+          y: 0,
+          transition: { delay: 80 * (cardData.length + 2) }
+        }"
+      >
+        <div class="w-full h-full bg-fuchsia-300" />
+      </el-col>
+      <el-col
+        v-motion
+        :xs="24"
+        :sm="24"
+        :md="getBarChartSpan()"
+        :lg="24"
+        class="mb-4"
+        :initial="{ opacity: 0, y: 100 }"
+        :enter="{
+          opacity: 1,
+          y: 0,
+          transition: { delay: 80 * (cardData.length + 3) }
+        }"
+      >
+        <div class="w-full h-36 bg-cyan-300" />
+      </el-col>
     </el-row>
   </div>
 </template>
@@ -125,5 +190,14 @@ const getColSpan = (index: number) => {
 
 :deep(.el-col > div) {
   width: 100%;
+}
+
+.chart-container {
+  width: 100%;
+  height: 400px; /* 可以根据需要调整高度 */
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
 }
 </style>

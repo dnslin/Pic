@@ -49,7 +49,7 @@ const closeAnnouncement = () => {
         <p class="font-medium text-sm sm:text-base">{{ message }}</p>
       </div>
       <button
-        class="absolute top-0 right-0 p-2 text-green-600 hover:text-green-800 focus:outline-none"
+        class="absolute top-0 right-0 p-2 text-green-600 hover:text-green-800 focus:outline-none bg-transparent"
         @click="closeAnnouncement"
       >
         <svg

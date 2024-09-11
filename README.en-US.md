@@ -44,4 +44,4 @@ The Lite version does not accept any issues and prs. If you have any questions, 
 
 ## License
 
-[MIT © 2020-present, pure-admin](./LICENSE)
+[MIT © 2024-present, pure-admin](./LICENSE)
