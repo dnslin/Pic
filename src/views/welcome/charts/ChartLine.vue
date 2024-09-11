@@ -58,5 +58,5 @@ setOptions({
 </script>
 
 <template>
-  <div ref="chartRef" style="width: 200px; height: 60px" />
+  <div ref="chartRef" style="width: 100%; height: 60px" />
 </template>

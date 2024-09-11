@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { useWindowSize } from "@vueuse/core";
 import StatCard from "./card/index.vue";
+import { ChartLine, ChartRound, Chart3Round } from "./charts";
 defineOptions({
   name: "Welcome"
 });
@@ -15,28 +16,42 @@ const cardData = [
     category: "今日上传",
     detail: "已上传文件数",
     amount: "327",
-    color: "#3b82f6"
+    color: "#3b82f6",
+    chartComponent: ChartLine,
+    chartProps: { data: [30, 40, 20, 50, 40, 60, 70], color: "#3b82f6" }
   },
   {
     id: "2",
     category: "图库信息",
     detail: "图片总量",
     amount: "9.27W",
-    color: "#10b981"
+    color: "#10b981",
+    chartComponent: ChartLine,
+    chartProps: { data: [60, 30, 40, 20, 30, 40, 50], color: "#10b981" }
   },
   {
     id: "3",
     category: "存储详情",
     detail: "当前使用存储",
     amount: "63G",
-    color: "#f59e0b"
+    color: "#f59e0b",
+    chartComponent: Chart3Round,
+    chartData: [
+      { value: 100, name: "webg" },
+      { value: 200, name: "png" },
+      { value: 300, name: "jpg" },
+      { value: 400, name: "icon" },
+      { value: 500, name: "gif" },
+      { value: 100, name: "psd" }
+    ]
   },
   {
     id: "4",
     category: "存储容量",
     detail: "总可用存储",
     amount: "500G",
-    color: "#6366f1"
+    color: "#6366f1",
+    chartComponent: ChartRound
   }
 ];
 
@@ -70,7 +85,15 @@ const getColSpan = (index: number) => {
           :is-selected="selectedCard === card.id"
           :index="index"
           @select="selectCard"
-        />
+        >
+          <template #chart>
+            <component
+              :is="card.chartComponent"
+              v-bind="card.chartProps || {}"
+              :chartData="card.chartData"
+            />
+          </template>
+        </StatCard>
       </el-col>
     </el-row>
   </div>

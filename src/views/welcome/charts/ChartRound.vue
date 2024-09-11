@@ -56,10 +56,10 @@ setOptions({
       },
       data: [100],
       coordinateSystem: "polar",
-      color: "#7846e5",
+      color: "#6366f1",
       itemStyle: {
         shadowBlur: 2,
-        shadowColor: "#7846e5",
+        shadowColor: "#6366f1",
         shadowOffsetX: 0,
         shadowOffsetY: 0
       }
@@ -69,5 +69,5 @@ setOptions({
 </script>
 
 <template>
-  <div ref="chartRef" style="width: 100%; height: 100px" />
+  <div ref="chartRef" style="width: 100%; height: 60px" />
 </template>

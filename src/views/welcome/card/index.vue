@@ -8,6 +8,7 @@ interface CardProps {
   isSelected: boolean;
   index: number;
   color?: string;
+  chartData?: { value: number; name: string }[];
 }
 
 const props = defineProps<CardProps>();
@@ -55,9 +56,12 @@ const handleKeyDown = (event: KeyboardEvent) => {
           {{ detail }}
         </span>
       </div>
-      <div class="mt-auto">
+      <div class="flex justify-between items-end mt-auto">
         <div class="text-3xl font-bold">
           {{ amount }}
+        </div>
+        <div class="chart-container">
+          <slot name="chart" />
         </div>
       </div>
     </div>
@@ -82,5 +86,13 @@ const handleKeyDown = (event: KeyboardEvent) => {
 
 .stat-card:not(.bg-gray-900):hover {
   background-color: #f8fafc;
+}
+
+.chart-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 60px;
 }
 </style>
