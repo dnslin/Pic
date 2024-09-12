@@ -2,13 +2,7 @@
 import { ref } from "vue";
 import { useWindowSize } from "@vueuse/core";
 import StatCard from "./card/index.vue";
-import {
-  Announcement,
-  UploadGuidelines,
-  Carousel,
-  TimeLine,
-  WeatherCard
-} from "./other";
+import { Announcement, UploadGuidelines, Carousel, TimeLine } from "./other";
 import { ChartLine, ChartRound, Chart3Round, ChartBar } from "./charts";
 defineOptions({
   name: "Welcome"
@@ -137,7 +131,7 @@ const carouselCards = [
       @close="handleAnnouncementClose"
     />
     <UploadGuidelines class="mb-3" />
-    <WeatherCard class="mb-3" :temperature="36" weather="sunny" />
+    <!-- <WeatherCard class="mb-3" :t/emperature="36" weather="sunny" /> -->
     <el-row :gutter="24" justify="space-around">
       <el-col
         v-for="(card, index) in cardData"

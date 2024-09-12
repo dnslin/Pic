@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import { Icon } from "@iconify/vue";
 
-const isExpanded = ref(false);
+const isExpanded = ref(true);
 
 const toggleExpand = () => {
   isExpanded.value = !isExpanded.value;
