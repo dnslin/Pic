@@ -228,7 +228,7 @@ const carouselCards = [
 
 .chart-container {
   width: 100%;
-  height: 400px; /* 可以根据需要调整高度 */
+  height: 450px; /* 可以根据需要调整高度 */
   padding: 20px;
   background-color: #fff;
   border-radius: 8px;

@@ -54,7 +54,7 @@ onUnmounted(() => {
   <div class="relative w-full h-full overflow-hidden">
     <div class="absolute inset-0 flex items-center justify-center">
       <div
-        class="relative w-full max-w-[16rem] md:max-w-[16rem] aspect-[2/3] carousel"
+        class="relative w-full max-w-[18rem] md:max-w-[18rem] aspect-[2/3] carousel"
       >
         <TransitionGroup name="carousel">
           <div

@@ -41,7 +41,7 @@ watch(
         top: "20px",
         left: "3%",
         right: "4%",
-        bottom: "7%",
+        bottom: "9%",
         containLabel: true
       },
       legend: {

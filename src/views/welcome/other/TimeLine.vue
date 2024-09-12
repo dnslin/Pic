@@ -51,6 +51,29 @@ const activities = [
     icon: useRenderIcon(Iphone, {
       color: "#0bbd87"
     })
+  },
+  {
+    content: "图片G上传成功",
+    timestamp: lastBuildTime,
+    icon: markRaw(useRenderFlicker())
+  },
+  {
+    content: "图片H上传成功",
+    timestamp: lastBuildTime,
+    icon: markRaw(
+      useRenderFlicker({ borderRadius: 0, background: "#C9872AFF" })
+    )
+  },
+  {
+    content: "图片I上传成功",
+    timestamp: lastBuildTime,
+    icon: markRaw(
+      useRenderFlicker({
+        background: randomGradient({
+          randomizeHue: true
+        })
+      })
+    )
   }
 ];
 </script>
