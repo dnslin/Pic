@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import { useWindowSize } from "@vueuse/core";
 import StatCard from "./card/index.vue";
-import { Announcement, UploadGuidelines } from "./other";
+import { Announcement, UploadGuidelines, Carousel, TimeLine } from "./other";
 import { ChartLine, ChartRound, Chart3Round, ChartBar } from "./charts";
 defineOptions({
   name: "Welcome"
@@ -88,6 +88,39 @@ const getBarChartSpan = () => {
   if (width.value < 768) return 24; // 小屏幕时，柱状图占满一行
   return 16; // 大屏幕时，柱状图占据2/3宽度
 };
+
+const carouselCards = [
+  {
+    id: 1,
+    title: "美丽风景",
+    imageUrl:
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+  },
+  {
+    id: 2,
+    title: "城市天际线",
+    imageUrl:
+      "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+  },
+  {
+    id: 3,
+    title: "自然特写",
+    imageUrl:
+      "https://images.unsplash.com/photo-1418065460487-3e41a6c84dc5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+  },
+  {
+    id: 4,
+    title: "抽象艺术",
+    imageUrl:
+      "https://images.unsplash.com/photo-1573221566340-81bdde00e00b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+  },
+  {
+    id: 5,
+    title: "人像摄影",
+    imageUrl:
+      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+  }
+];
 </script>
 
 <template>
@@ -152,7 +185,7 @@ const getBarChartSpan = () => {
         :xs="24"
         :sm="24"
         :md="getBarChartSpan()"
-        :lg="8"
+        :lg="6"
         class="mb-4"
         :initial="{ opacity: 0, y: 100 }"
         :enter="{
@@ -161,14 +194,14 @@ const getBarChartSpan = () => {
           transition: { delay: 80 * (cardData.length + 2) }
         }"
       >
-        <div class="w-full h-full bg-fuchsia-300" />
+        <Carousel :cards="carouselCards" />
       </el-col>
       <el-col
         v-motion
         :xs="24"
         :sm="24"
         :md="getBarChartSpan()"
-        :lg="24"
+        :lg="2"
         class="mb-4"
         :initial="{ opacity: 0, y: 100 }"
         :enter="{
@@ -177,7 +210,7 @@ const getBarChartSpan = () => {
           transition: { delay: 80 * (cardData.length + 3) }
         }"
       >
-        <div class="w-full h-36 bg-cyan-300" />
+        <TimeLine />
       </el-col>
     </el-row>
   </div>
