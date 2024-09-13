@@ -1,10 +1,11 @@
 import { ref, computed } from "vue";
 import type { Ref } from "vue";
+
 export interface ToolbarItem {
   id: string;
   icon: string;
   label: string;
-  action: () => void;
+  actionName: string;
   mobileOnly?: boolean;
 }
 
@@ -23,6 +24,7 @@ export const useWindowSize = () => {
 
   return { windowWidth, isSmallScreen, handleResize };
 };
+
 export const useSearch = (isSmallScreen: Ref<boolean>) => {
   const search = ref("");
   const isSearchExpanded = ref(false);
@@ -93,25 +95,25 @@ export const toolbarItems: ToolbarItem[] = [
     id: "albums",
     icon: "mdi:album",
     label: "相册",
-    action: () => console.log("Navigate to albums")
+    actionName: "navigateToAlbums"
   },
   {
     id: "add",
     icon: "mdi:plus",
     label: "添加相册",
-    action: () => console.log("Add album")
+    actionName: "addAlbum"
   },
   {
     id: "reupload",
     icon: "mdi:upload",
     label: "重新上传",
-    action: () => console.log("Reupload")
+    actionName: "reupload"
   },
   {
     id: "permissions",
     icon: "mdi:lock",
     label: "设置权限",
-    action: () => console.log("Set permissions")
+    actionName: "setPermissions"
   }
 ];
 
@@ -120,24 +122,24 @@ export const dropdownItems: ToolbarItem[] = [
     id: "share",
     icon: "mdi:share",
     label: "分享",
-    action: () => console.log("Share")
+    actionName: "share"
   },
   {
     id: "details",
     icon: "mdi:information",
     label: "详细信息",
-    action: () => console.log("Show details")
+    actionName: "showDetails"
   },
   {
     id: "rename",
     icon: "mdi:pencil",
     label: "重命名",
-    action: () => console.log("Rename")
+    actionName: "rename"
   },
   {
     id: "delete",
     icon: "mdi:delete",
     label: "删除",
-    action: () => console.log("Delete items")
+    actionName: "deleteItems"
   }
 ];
