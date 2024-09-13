@@ -30,7 +30,7 @@ const closeAnnouncement = () => {
   >
     <div
       v-if="isVisible"
-      class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4 rounded shadow-md relative"
+      class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-3 rounded shadow-md relative"
       role="alert"
     >
       <div class="flex items-center">
