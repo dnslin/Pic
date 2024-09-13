@@ -174,7 +174,7 @@ const carouselCards = [
           transition: { delay: 80 * (cardData.length + 1) }
         }"
       >
-        <div class="chart-container">
+        <div class="chart-container chart-container-height">
           <ChartBar
             :requireData="barChartData.requireData"
             :questionData="barChartData.questionData"
@@ -187,7 +187,7 @@ const carouselCards = [
         :sm="24"
         :md="getBarChartSpan()"
         :lg="6"
-        class="mb-4"
+        class="mb-4 chart-container-height"
         :initial="{ opacity: 0, y: 100 }"
         :enter="{
           opacity: 1,
@@ -203,7 +203,7 @@ const carouselCards = [
         :sm="24"
         :md="getBarChartSpan()"
         :lg="2"
-        class="mb-4"
+        class="mb-4 chart-container-height"
         :initial="{ opacity: 0, y: 100 }"
         :enter="{
           opacity: 1,
@@ -228,10 +228,13 @@ const carouselCards = [
 
 .chart-container {
   width: 100%;
-  height: 450px; /* 可以根据需要调整高度 */
   padding: 20px;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+}
+
+.chart-container-height {
+  height: 400px; /* 可以根据需要调整高度 */
 }
 </style>
