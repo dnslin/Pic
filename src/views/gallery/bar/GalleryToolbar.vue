@@ -102,7 +102,6 @@ import {
   toolbarItems,
   dropdownItems
 } from "./GalleryToolbarUtils";
-import { string } from "vue-types";
 
 const { isSmallScreen, handleResize } = useWindowSize();
 const { isDropdownOpen, dropdownRef, toggleDropdown, closeDropdown } =
