@@ -1,5 +1,6 @@
 import { ref, computed } from "vue";
 import type { Ref } from "vue";
+import { message } from "@/utils/message";
 export interface ToolbarItem {
   id: string;
   icon: string;
@@ -93,25 +94,25 @@ export const toolbarItems: ToolbarItem[] = [
     id: "albums",
     icon: "mdi:album",
     label: "相册",
-    action: () => console.log("Navigate to albums")
+    action: () => message("albums", { type: "success" })
   },
   {
     id: "add",
     icon: "mdi:plus",
     label: "添加相册",
-    action: () => console.log("Add album")
+    action: () => message("add", { type: "success" })
   },
   {
     id: "reupload",
     icon: "mdi:upload",
     label: "重新上传",
-    action: () => console.log("Reupload")
+    action: () => message("reupload", { type: "success" })
   },
   {
     id: "permissions",
     icon: "mdi:lock",
     label: "设置权限",
-    action: () => console.log("Set permissions")
+    action: () => message("permissions", { type: "success" })
   }
 ];
 
@@ -120,24 +121,24 @@ export const dropdownItems: ToolbarItem[] = [
     id: "share",
     icon: "mdi:share",
     label: "分享",
-    action: () => console.log("Share")
+    action: () => message("share", { type: "success" })
   },
   {
     id: "details",
     icon: "mdi:information",
     label: "详细信息",
-    action: () => console.log("Show details")
+    action: () => message("details", { type: "success" })
   },
   {
     id: "rename",
     icon: "mdi:pencil",
     label: "重命名",
-    action: () => console.log("Rename")
+    action: () => message("rename", { type: "success" })
   },
   {
     id: "delete",
     icon: "mdi:delete",
     label: "删除",
-    action: () => console.log("Delete items")
+    action: () => message("delete", { type: "success" })
   }
 ];
