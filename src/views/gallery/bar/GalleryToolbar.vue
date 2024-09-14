@@ -7,7 +7,7 @@
           :key="item.id"
           class="btn"
           :class="{ 'btn-primary': item.id === 'albums' }"
-          @click="actions[item.actionName](item.actionName)"
+          @click="item.action"
         >
           <IconifyIconOnline :icon="item.icon" />
           <span>{{ item.label }}</span>
@@ -26,7 +26,7 @@
                 :class="{
                   'text-red-500 dark:text-red-400': item.id === 'delete'
                 }"
-                @click="actions[item.actionName]"
+                @click="item.action"
               >
                 <IconifyIconOnline :icon="item.icon" />
                 <span>{{ item.label }}</span>
