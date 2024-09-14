@@ -7,7 +7,7 @@
           :key="item.id"
           class="btn"
           :class="{ 'btn-primary': item.id === 'albums' }"
-          @click="item.action"
+          @click="actions[item.actionName](item.actionName)"
         >
           <IconifyIconOnline :icon="item.icon" />
           <span>{{ item.label }}</span>
@@ -26,7 +26,7 @@
                 :class="{
                   'text-red-500 dark:text-red-400': item.id === 'delete'
                 }"
-                @click="item.action"
+                @click="actions[item.actionName]"
               >
                 <IconifyIconOnline :icon="item.icon" />
                 <span>{{ item.label }}</span>
@@ -111,7 +111,6 @@ const {
   isSearchExpanded,
   searchInputRef,
   expandSearch,
-  contractSearch,
   handleSearchFocus,
   handleSearchBlur
 } = useSearch(isSmallScreen);
@@ -128,6 +127,26 @@ const dropdownMenuItems = computed(() => [
   ...dropdownItems
 ]);
 
+function test(actionName: string) {
+  console.log(`Action triggered: ${actionName}`);
+}
+
+type ActionFunction = (actionName: string) => void;
+
+interface Actions {
+  [key: string]: ActionFunction;
+}
+
+const actions: Actions = {
+  navigateToAlbums: test,
+  addAlbum: test,
+  reupload: test,
+  setPermissions: test,
+  share: test,
+  showDetails: test,
+  rename: test,
+  deleteItems: test
+};
 onMounted(() => {
   document.addEventListener("click", closeDropdown);
   window.addEventListener("resize", handleResize);
@@ -208,3 +227,4 @@ onUnmounted(() => {
   opacity: 0;
 }
 </style>
+./galleryToolbarUtils
