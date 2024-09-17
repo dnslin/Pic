@@ -101,7 +101,7 @@ import {
   sortOptions,
   toolbarItems,
   dropdownItems
-} from "./galleryToolbarUtils";
+} from "./utils";
 
 const { isSmallScreen, handleResize } = useWindowSize();
 const { isDropdownOpen, dropdownRef, toggleDropdown, closeDropdown } =
@@ -227,4 +227,4 @@ onUnmounted(() => {
   opacity: 0;
 }
 </style>
-./galleryToolbarUtils
+./galleryToolbarUtils ./utils

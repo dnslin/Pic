@@ -1,1 +1,1 @@
-export { default as GalleryToolbar } from "./GalleryToolbar.vue";
+export { default as GalleryToolbar } from "./index.vue";
