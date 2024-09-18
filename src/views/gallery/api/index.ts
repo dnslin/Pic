@@ -31,19 +31,23 @@ async function getImageWithAspectRatio(data: any): Promise<ImageItem> {
   };
 }
 
-export async function fetchImages(perPage: number = 20): Promise<ImageItem[]> {
+async function fetchSingleImage(): Promise<ImageItem> {
+  const response = await api.get("/wallpaper/views", {
+    params: { type: "json" }
+  });
+  const data = response.data;
+  if (data.success) {
+    return await getImageWithAspectRatio(data);
+  }
+  throw new Error("Failed to fetch image");
+}
+
+export async function fetchImages(perPage: number = 40): Promise<ImageItem[]> {
   try {
-    const images: ImageItem[] = [];
-    for (let i = 0; i < perPage; i++) {
-      const response = await api.get("/wallpaper/views", {
-        params: { type: "json" }
-      });
-      const data = response.data;
-      if (data.success) {
-        const imageWithAspectRatio = await getImageWithAspectRatio(data);
-        images.push(imageWithAspectRatio);
-      }
-    }
+    const promises = Array(perPage)
+      .fill(null)
+      .map(() => fetchSingleImage());
+    const images = await Promise.all(promises);
     return images;
   } catch (error) {
     console.error("Error fetching images:", error);

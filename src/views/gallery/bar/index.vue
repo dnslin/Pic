@@ -119,11 +119,15 @@ const filter = ref(filterOptions[0].value);
 const sort = ref(sortOptions[0].value);
 
 const visibleToolbarItems = computed(() =>
-  toolbarItems.filter(item => !isSmallScreen.value || item.id === "albums")
+  toolbarItems.filter(
+    item => !isSmallScreen.value || ["albums", "add"].includes(item.id)
+  )
 );
 
 const dropdownMenuItems = computed(() => [
-  ...toolbarItems.filter(item => isSmallScreen.value && item.id !== "albums"),
+  ...toolbarItems.filter(
+    item => isSmallScreen.value && !["albums", "add"].includes(item.id)
+  ),
   ...dropdownItems
 ]);
 
