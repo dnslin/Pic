@@ -13,11 +13,9 @@ const selectedCount = computed(() => selectedImages.value.size);
 </script>
 
 <template>
-  <div class="absolute inset-0 custom-scrollbar overflow-y-auto">
-    <div class="sticky top-0 z-10">
-      <div class="max-w-full">
-        <GalleryToolbar :selected-count="selectedCount" />
-      </div>
+  <div class="absolute inset-0">
+    <div class="max-w-full">
+      <GalleryToolbar :selected-count="selectedCount" />
     </div>
     <ImageGallery />
   </div>

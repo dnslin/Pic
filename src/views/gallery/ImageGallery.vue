@@ -1,55 +1,57 @@
 <template>
-  <div
-    ref="scrollContainer"
-    class="w-full mt-2 relative min-h-[400px] overflow-y-auto"
-    style="max-height: calc(100vh - 100px)"
-  >
+  <div class="flex h-full pb-20">
     <div
-      v-if="imageStore.loading && imageStore.images.length === 0"
-      class="absolute inset-0 flex flex-col items-center justify-center"
+      ref="scrollContainer"
+      class="w-full mt-2 relative min-h-[400px] overflow-y-auto"
     >
-      <el-icon
-        class="animate-spin text-6xl text-blue-500 dark:text-blue-400 mb-4"
+      <div
+        v-if="imageStore.loading && imageStore.images.length === 0"
+        class="absolute inset-0 flex flex-col items-center justify-center"
       >
-        <Loading />
-      </el-icon>
-      <p class="text-lg text-gray-600 dark:text-gray-300">正在加载图片...</p>
-    </div>
-    <div
-      v-else-if="imageStore.images.length === 0"
-      class="absolute inset-0 flex items-center justify-center"
-    >
-      <p class="text-lg text-gray-600 dark:text-gray-300">暂无图片</p>
-    </div>
-    <VirtualWaterfall
-      v-else
-      :items="imageStore.images"
-      :calcItemHeight="calcItemHeight"
-      :item-min-width="itemMinWidth"
-      :gap="8"
-      :padding="0"
-      :virtual="true"
-      :preload-screen-count="[1, 2]"
-      class="w-full"
-    >
-      <template #default="{ item }: { item: ImageItem }">
-        <div class="image-item">
-          <img
-            :src="item.src"
-            :alt="item.id"
-            :style="{ aspectRatio: item.aspectRatio }"
-            loading="lazy"
-          />
-        </div>
-      </template>
-    </VirtualWaterfall>
-    <div
-      v-if="imageStore.loading && imageStore.images.length > 0"
-      class="w-full flex justify-center py-4"
-    >
-      <el-icon class="animate-spin text-4xl text-blue-500 dark:text-blue-400">
-        <Loading />
-      </el-icon>
+        <el-icon
+          class="animate-spin text-6xl text-blue-500 dark:text-blue-400 mb-4"
+        >
+          <Loading />
+        </el-icon>
+        <p class="text-lg text-gray-600 dark:text-gray-300">正在加载图片...</p>
+      </div>
+      <div
+        v-else-if="imageStore.images.length === 0"
+        class="absolute inset-0 flex items-center justify-center"
+      >
+        <p class="text-lg text-gray-600 dark:text-gray-300">暂无图片</p>
+      </div>
+      <VirtualWaterfall
+        v-else
+        rowKey="id"
+        :items="imageStore.images"
+        :calc-item-height="calcItemHeight"
+        :item-min-width="itemMinWidth"
+        :gap="8"
+        :padding="0"
+        :virtual="true"
+        :preload-screen-count="[1, 2]"
+        class="w-full"
+      >
+        <template #default="{ item }: { item: ImageItem }">
+          <div class="image-item">
+            <img
+              :src="item.src"
+              :alt="item.id"
+              :style="{ aspectRatio: item.aspectRatio }"
+              loading="lazy"
+            />
+          </div>
+        </template>
+      </VirtualWaterfall>
+      <div
+        v-if="imageStore.loading && imageStore.images.length > 0"
+        class="w-full flex justify-center py-4"
+      >
+        <el-icon class="animate-spin text-4xl text-blue-500 dark:text-blue-400">
+          <Loading />
+        </el-icon>
+      </div>
     </div>
   </div>
 </template>
@@ -95,9 +97,7 @@ useInfiniteScroll(
 );
 
 onMounted(() => {
-  if (imageStore.images.length === 0) {
-    imageStore.fetchImages();
-  }
+  if (imageStore.images.length === 0) imageStore.fetchImages();
 });
 </script>
 
