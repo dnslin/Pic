@@ -1,8 +1,8 @@
 <template>
-  <div class="flex h-full pb-20">
+  <div class="flex h-full pb-20 overflow-hidden">
     <div
       ref="scrollContainer"
-      class="w-full mt-2 relative min-h-[400px] overflow-y-auto"
+      class="w-full mt-2 relative min-h-[400px] overflow-y-auto custom-scrollbar"
     >
       <div
         v-if="imageStore.loading && imageStore.images.length === 0"
@@ -35,11 +35,12 @@
       >
         <template #default="{ item }: { item: ImageItem }">
           <div class="image-item">
-            <img
-              :src="item.src"
+            <el-image
               :alt="item.id"
-              :style="{ aspectRatio: item.aspectRatio }"
+              :src="item.src"
+              class="w-full rounded-md"
               loading="lazy"
+              fit="cover"
             />
           </div>
         </template>
@@ -108,14 +109,6 @@ onMounted(() => {
   max-width: 100%;
 }
 
-.image-item:hover {
-  @apply transform scale-105;
-}
-
-.image-item img {
-  @apply w-full h-full object-cover rounded-md;
-}
-
 @media (width <= 640px) {
   .image-item {
     @apply shadow-sm;
@@ -123,6 +116,31 @@ onMounted(() => {
 
   .image-item:hover {
     @apply transform-none;
+  }
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #c0bfbf #f1f1f1;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    margin: 5px 0;
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border: 2px solid #f1f1f1;
+    border-radius: 10px;
+
+    &:hover {
+      background-color: #555;
+    }
   }
 }
 </style>
