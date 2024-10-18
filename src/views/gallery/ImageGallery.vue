@@ -2,7 +2,7 @@
   <div class="flex h-full pb-20 overflow-hidden">
     <div
       ref="scrollContainer"
-      class="w-full mt-2 relative min-h-[400px] overflow-y-auto custom-scrollbar"
+      class="w-full mt-2 relative min-h-[400px] overflow-y-auto pure-scrollbar"
     >
       <div
         v-if="imageStore.loading && imageStore.images.length === 0"
@@ -120,27 +120,6 @@ onMounted(() => {
 }
 
 .custom-scrollbar {
-  scrollbar-width: thin;
-  scrollbar-color: #c0bfbf #f1f1f1;
-
-  &::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  &::-webkit-scrollbar-track {
-    margin: 5px 0;
-    background: #f1f1f1;
-    border-radius: 10px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: #888;
-    border: 2px solid #f1f1f1;
-    border-radius: 10px;
-
-    &:hover {
-      background-color: #555;
-    }
-  }
+  scrollbar-color: rgb(63 64 66) transparent;
 }
 </style>
