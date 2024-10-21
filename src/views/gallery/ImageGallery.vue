@@ -26,7 +26,7 @@
         rowKey="id"
         :items="imageStore.images"
         :calc-item-height="calcItemHeight"
-        :item-min-width="itemMinWidth"
+        :item-min-width="itemMinWidth - 200"
         :gap="8"
         :padding="0"
         :virtual="true"
@@ -78,6 +78,7 @@ const itemMinWidth = computed(() => {
 });
 
 const calcItemHeight = (item: ImageItem, itemWidth: number) => {
+  console.log(itemWidth, item.aspectRatio);
   return itemWidth / item.aspectRatio;
 };
 
