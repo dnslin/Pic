@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-full pb-20 overflow-hidden">
+  <div class="flex pb-20 overflow-hidden" style="height: 820px">
     <div
       ref="scrollContainer"
       class="w-full mt-2 relative min-h-[400px] overflow-y-auto pure-scrollbar"
@@ -26,7 +26,7 @@
         rowKey="id"
         :items="imageStore.images"
         :calc-item-height="calcItemHeight"
-        :item-min-width="itemMinWidth - 200"
+        :item-min-width="itemMinWidth - 100"
         :gap="8"
         :padding="0"
         :virtual="true"

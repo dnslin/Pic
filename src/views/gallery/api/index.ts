@@ -1,4 +1,4 @@
-import axios from "axios";
+// import axios from "axios";
 
 export interface ImageItem {
   id: string;
@@ -7,10 +7,10 @@ export interface ImageItem {
   aspectRatio: number;
 }
 
-const api = axios.create({
-  baseURL: "https://api.vvhan.com/api",
-  timeout: 10000
-});
+// const api = axios.create({
+//   baseURL: "https://api.vvhan.com/api",
+//   timeout: 10000
+// });
 
 function loadImage(src: string): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
@@ -32,13 +32,15 @@ async function getImageWithAspectRatio(data: any): Promise<ImageItem> {
 }
 
 async function fetchSingleImage(): Promise<ImageItem> {
-  const response = await api.get("/wallpaper/views", {
-    params: { type: "json" }
-  });
-  const data = response.data;
-  if (data.success) {
-    return await getImageWithAspectRatio(data);
-  }
+  // const response = await api.get("/wallpaper/views", {
+  //   params: { type: "json" }
+  // });
+  // const data = response.data;
+  const data = {
+    type: "image",
+    url: "https://www.baidu.com/img/PCfb_5bf082d29588c07f842ccde3f97243ea.png"
+  };
+  return await getImageWithAspectRatio(data);
   throw new Error("Failed to fetch image");
 }
 
